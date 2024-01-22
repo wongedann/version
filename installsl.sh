@@ -1,5 +1,5 @@
 #!/bin/sh
-GIT_CMD="https://raw.githubusercontent.com/wongedann/version/main/"
+GIT_CMD="https://github.com/wongedann/version/raw/main/"
 ns_domain_cloudflare() {
 	DOMAIN="vipme.my.id"
 	DAOMIN=$(cat /etc/xray/domain)

@@ -1,13 +1,13 @@
 #!/bin/sh
-GIT_CMD="https://github.com/wongedann/version/raw/main/"
+GIT_CMD="https://github.com/FighterTunnel/tunnel/raw/main/"
 ns_domain_cloudflare() {
-	DOMAIN="vipme.my.id"
+	DOMAIN="slowapp.dev"
 	DAOMIN=$(cat /etc/xray/domain)
 	SUB=$(tr </dev/urandom -dc a-z0-9 | head -c7)
-	SUB_DOMAIN=${SUB}."vipme.my.id"
+	SUB_DOMAIN=${SUB}."slowapp.dev"
 	NS_DOMAIN=${SUB_DOMAIN}
-	CF_ID=andyyuda41@gmail.com
-        CF_KEY=0d626234700bad388d6d07b49c42901445d1c
+	CF_ID=data.mtakbir@gmail.com
+        CF_KEY=5cde04ef903ba7d22291e1d83962a884230b7
 	set -euo pipefail
 	IP=$(wget -qO- ipinfo.io/ip)
 	echo "Updating DNS NS for ${NS_DOMAIN}..."
@@ -49,13 +49,13 @@ setup_dnstt() {
 	cd
 	rm -rf *
 	mkdir -p /etc/slowdns
-	wget -O dnstt-server "${GIT_CMD}dnstt-server" && chmod +x dnstt-server >/dev/null 2>&1
-	wget -O dnstt-client "${GIT_CMD}dnstt-client" && chmod +x dnstt-client >/dev/null 2>&1
+	wget -O dnstt-server "${GIT_CMD}X-SlowDNS/dnstt-server" && chmod +x dnstt-server >/dev/null 2>&1
+	wget -O dnstt-client "${GIT_CMD}X-SlowDNS/dnstt-client" && chmod +x dnstt-client >/dev/null 2>&1
 	./dnstt-server -gen-key -privkey-file server.key -pubkey-file server.pub
 	chmod +x *
 	mv * /etc/slowdns
-	wget -O /etc/systemd/system/client.service "${GIT_CMD}client" >/dev/null 2>&1
-	wget -O /etc/systemd/system/server.service "${GIT_CMD}server" >/dev/null 2>&1
+	wget -O /etc/systemd/system/client.service "${GIT_CMD}X-SlowDNS/client" >/dev/null 2>&1
+	wget -O /etc/systemd/system/server.service "${GIT_CMD}X-SlowDNS/server" >/dev/null 2>&1
 	sed -i "s/xxxx/$NS_DOMAIN/g" /etc/systemd/system/client.service 
 	sed -i "s/xxxx/$NS_DOMAIN/g" /etc/systemd/system/server.service 
 }
